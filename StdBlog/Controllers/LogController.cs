@@ -21,6 +21,11 @@ namespace StdBlog.Controllers
             return View();
         }
 
+        public ActionResult UserLogA()
+        {
+            return View();
+        }
+
         public ActionResult ALC()
         {
             return View();
@@ -28,6 +33,9 @@ namespace StdBlog.Controllers
 
         public ActionResult ULC()
         {
+            var bol = m_UserController.Vertify(Request["inputEmail"], Request["inputPassword"]);
+            if (!bol) return RedirectToAction("UserLogA", "Log");
+            Session["id"] = m_UserController.getID(Request["inputEmail"]);
             return View();
         }
 

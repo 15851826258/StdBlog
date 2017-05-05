@@ -12,7 +12,32 @@ namespace StdBlog.Controllers
 {
     public class m_UserController : Controller
     {
+        static private m_UserContext db1 = new m_UserContext();
+        public static bool Vertify(string uid, string pw)
+        {
+            string pws = Helper.AESHelper.Encrypt(pw);
+            foreach (var t in db1.m_Users)
+            {
+                if (t.loginid == uid & t.password == pws) return true;
+            }
+            return false;
+        }
+        public static int getID(string uid)
+        {
+            foreach (var t in db1.m_Users)
+                if (t.loginid == uid) return t.ID;
+            return -1;
+        }
+        public static m_User getUserPac(int id)
+        {
+            if (id == -1) return null;
+            foreach (var t in db1.m_Users)
+                if (t.ID == id) return t;
+            return null;
+        }
         private m_UserContext db = new m_UserContext();
+
+
 
         // GET: m_User
         public ActionResult Index()
@@ -52,9 +77,10 @@ namespace StdBlog.Controllers
         {
             if (ModelState.IsValid)
             {
+                m_User.password = Helper.AESHelper.Encrypt(m_User.password);
                 db.m_Users.Add(m_User);
                 db.SaveChanges();
-                return null;
+                return RedirectToAction("UserLog", "Log");
             }
 
             return View(m_User);
