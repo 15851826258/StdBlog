@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace StdBlog.Controllers
 {
-    public class LogController :Controller
+    public class LogController : Controller
     {
         public ActionResult AdminLog()
         {
@@ -15,6 +15,16 @@ namespace StdBlog.Controllers
         }
 
         public ActionResult UserLog()
+        {
+            return View();
+        }
+
+        public ActionResult ALC()
+        {
+            return View();
+        }
+
+        public ActionResult ULC()
         {
             return View();
         }
