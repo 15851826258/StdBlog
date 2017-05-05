@@ -5,9 +5,11 @@
     Layout = "~/Views/Log/_UserregLayout.cshtml";
 }
 
-@{
-    Html.RenderAction("Create","m_User", null);
+@{ 
+    try { Html.RenderAction("Create", "m_User"); }
+    catch (Exception) { Html.RenderAction("UserLog", "Log"); }
 }
+
 
 
 

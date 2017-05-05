@@ -1,15 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "AdminLog";
-    Layout = "~/Views/Log/_AdminLogLayout.cshtml";
+    ViewBag.Title = "UserLog";
+    Layout = "~/Views/Log/_UserLogLayout.cshtml";
 }
 
 @Styles.Render("~/Content/signin.css")
 
-<h2>AdminLog</h2>
+<h2>UserLog</h2>
 
 <div class="container">
-    @using (Html.BeginForm("ULC", "Log", FormMethod.Post, new { @class = "form-signin" }))
+    @using (Html.BeginForm("ULC", "Log", FormMethod.Post, new { @class = "form-signin"}))
     {
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
@@ -22,6 +22,18 @@
                 @Html.CheckBox("cb") Remember Me
             </label>
         </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+
+            <script type="text/javascript">
+                function signinclicked() {
+                    document.getElementById("subbtn").click();
+                }
+            </script>
+            <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                <a class="btn btn-default btn-success" role="button" onclick="signinclicked()">Sign in</a>
+                @Html.ActionLink("Sign up","UserReg","Log",null,new {@class="btn btn-default btn-warning",role="button" })
+            </div>
+            <button class="btn-sin" id="subbtn" type="submit"></button>
     }
+
 </div> <!-- /container -->

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
@@ -14,8 +15,11 @@ namespace StdBlog.Models
     #region Admin
     {
         public int ID { get; set; }
+        [Display(Name ="Email")]
         public string loginid { get; set; }
+        [Display(Name = "Password")]
         public string password { get; set; }
+        [Display(Name = "Name")]
         public string name { set; get; }
 
 
@@ -34,9 +38,13 @@ namespace StdBlog.Models
 
         public enum Gender { female, male, secret }
         public int ID { set; get; }
+        [Display(Name = "Email")]
         public string loginid { set; get; }
+        [Display(Name = "Password")]
         public string password { set; get; }
+        [Display(Name = "Name")]
         public string name { set; get; }
+        [Display(Name = "Gender")]
         public Gender gender { set; get; }
         public string follows { set; get; }
 

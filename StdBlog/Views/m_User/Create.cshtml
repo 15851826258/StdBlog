@@ -4,26 +4,17 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
     @using (Html.BeginForm()) 
     {
         @Html.AntiForgeryToken()
         
         <div class="form-horizontal">
-            <h4>m_User</h4>
+            <h2>Regist</h2>
             <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.loginid, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.loginid, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.loginid, new { htmlAttributes = new { @class = "form-control" , type = "email" ,required=true} })
                     @Html.ValidationMessageFor(model => model.loginid, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -31,7 +22,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" , required = true } })
                     @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -39,7 +30,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" , required = true } })
                     @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -53,23 +44,15 @@
             </div>
     
             <div class="form-group">
-                @Html.LabelFor(model => model.follows, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.follows, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.follows, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <button type="submit" class="btn btn-default btn-success" >
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                          Submit
+                    </button>
                 </div>
             </div>
         </div>
     }
     
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-</body>
-</html>
+
+

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StdBlog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace StdBlog.Controllers
 {
     public class LogController : Controller
     {
+
         public ActionResult AdminLog()
         {
             return View();
@@ -25,6 +27,12 @@ namespace StdBlog.Controllers
         }
 
         public ActionResult ULC()
+        {
+            return View();
+        }
+
+
+        public ActionResult UserReg()
         {
             return View();
         }

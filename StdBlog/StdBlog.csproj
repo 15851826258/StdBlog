@@ -214,6 +214,7 @@
     <Content Include="Views\Log\UserLog.cshtml" />
     <Content Include="Views\Log\ALC.cshtml" />
     <Content Include="Views\Log\ULC.cshtml" />
+    <Content Include="Views\Log\UserReg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
