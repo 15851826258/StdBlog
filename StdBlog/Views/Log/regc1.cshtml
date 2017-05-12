@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>regc1</title>
+</head>
+<body onload="func()">
+    @using (Html.BeginForm("regc2", "Log",FormMethod.Post,new { id = "ff" }))
+    {
+
+    }
+    <div onshow="func()"> 
+    </div>
+    <script type="text/javascript">
+        function func()
+        {
+            document.getElementById("ff").submit();
+        }
+    </script>
+</body>
+</html>
