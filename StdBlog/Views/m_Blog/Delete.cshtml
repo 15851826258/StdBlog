@@ -1,0 +1,65 @@
+﻿@model StdBlog.Models.m_Blog
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>m_Blog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ownerid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ownerid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.visit_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.visit_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_modify_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_modify_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.classify)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.classify)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

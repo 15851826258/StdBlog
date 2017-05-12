@@ -38,7 +38,10 @@ namespace StdBlog.Controllers
         private m_UserContext db = new m_UserContext();
 
 
-
+        public ActionResult UserHome()
+        {
+            return View();
+        }
         // GET: m_User
         public ActionResult Index()
         {
@@ -80,6 +83,8 @@ namespace StdBlog.Controllers
                 m_User.password = Helper.AESHelper.Encrypt(m_User.password);
                 db.m_Users.Add(m_User);
                 db.SaveChanges();
+                Session["id"] = m_User.ID;
+                Session["name"] = m_User.name;
                 return RedirectToAction("UserLog", "Log");
             }
 

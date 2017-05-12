@@ -1,0 +1,59 @@
+﻿@model StdBlog.Models.m_Blog
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>m_Blog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ownerid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ownerid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.visit_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.visit_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_modify_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_modify_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.classify)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.classify)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -8,9 +8,26 @@
     <title>User Login</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/particles/style.css")
+    <style type="text/css">
+        .div-background {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 99.2%;
+        }
+        body {
+            background-color: #383838;
+        }
+
+
+        .div-foreground {
+            z-index: 2;
+        }
+    </style>
 </head>
 <body>
-    <!-- nav bar -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -18,24 +35,28 @@
                     <span class="sr-only"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>   User Login</a>
+                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>   StdBlog</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav"></ul>
 
                 @using (Html.BeginForm("AdminLog", "Log", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
                 {
-                    @Html.TextBox("bt1", "To Admin Login", new { @class = "btn btn-default", type = "submit" })
+            @Html.TextBox("bt1", "To Admin Login", new { @class = "btn btn-default", type = "submit" })
                 }
 
             </div><!--/.nav-collapse -->
         </div>
     </nav>
 
+    <div class="div-background">
+        <div id="particles-js"></div>
+        @Scripts.Render("~/Content/particles/particles.js")
+        @Scripts.Render("~/Content/particles/app.js")
 
-    <div class="container body-content">
+    </div>
+    <div class="div-foreground container body-content">
         @RenderBody()
-        <hr />
     </div>
 
     @Scripts.Render("~/bundles/jquery")

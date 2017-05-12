@@ -1,0 +1,61 @@
+﻿@model StdBlog.Models.m_Blog
+@{
+    ViewBag.Title = "Modify";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>m_Blog</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="hidden" class="form-control" id = "fc" name="fc"/>
+                @Html.ValidationMessageFor(model => model.content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @Styles.Render("~/Content/umeditor/themes/default/css/umeditor.css")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/Content/umeditor/umeditor.config.js")
+        @Scripts.Render("~/Content/umeditor/umeditor.min.js")
+        @Scripts.Render("~/Content/umeditor/lang/zh-cn/zh-cn.js")
+        <script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
+            <p>@(new HtmlString(Model.content))</p>
+        </script>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" onclick="bsClicked()" id="bs" />
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script type="text/javascript">
+        var um = UM.getEditor('myEditor');
+        function bsClicked() {
+            document.getElementById("fc").value = UM.getEditor('myEditor').getContent();
+            document.getElementById("bs").submit();
+        }
+    </script>
+}
+@Scripts.Render("~/bundles/bootstrap")

@@ -1,0 +1,47 @@
+﻿<!--UmEditor-->
+
+
+@{
+    Layout = null;
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>UmEditor</title>
+
+    @Styles.Render("~/Content/umeditor/themes/default/css/umeditor.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Content/umeditor/umeditor.config.js")
+    @Scripts.Render("~/Content/umeditor/umeditor.min.js")
+    @Scripts.Render("~/Content/umeditor/lang/zh-cn/zh-cn.js")
+
+</head>
+<body>
+    <h1>UmEditor</h1>
+    @using (Html.BeginForm("Exc", "Umeditor", FormMethod.Post, new { @class = "f-non", id = "f-non" }))
+    {
+        <input id="title" name="title" type="text" />
+        <input class="i-non" id="info" name="info" type="hidden" />
+    }
+    <!--style给定宽度可以影响编辑器的最终宽度-->
+    <script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
+        <p>快！在这写！</p>
+    </script>
+
+    <input type="submit" class="btn btn-success" onclick="btn_esClicked()" value="Submit" />
+
+    <script type="text/javascript">
+        //实例化编辑器
+        var um = UM.getEditor('myEditor');
+
+        function btn_esClicked() {
+            document.getElementById("info").value = UM.getEditor('myEditor').getContent();
+            document.getElementById("f-non").submit();
+        }
+    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>

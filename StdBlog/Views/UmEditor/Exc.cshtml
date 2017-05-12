@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Exc";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+
+
+<h1>EXC</h1>
+@(new HtmlString(Request.Unvalidated.Form["info"]))
+

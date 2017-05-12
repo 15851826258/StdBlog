@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "CreateBlog";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+
+<h2>CreateBlog</h2>
+
+
+Userid:@Session["id"]<hr/>
+@{Html.RenderAction("Editor", "UmEditor");}

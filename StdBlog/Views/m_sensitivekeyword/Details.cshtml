@@ -1,0 +1,27 @@
+﻿@model StdBlog.Models.m_sensitivekeyword
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>m_sensitivekeyword</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.key)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.key)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

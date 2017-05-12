@@ -1,0 +1,8 @@
+.count-particles {
+    background: #000022;
+    color: black;
+}
+
+#particles-js {
+    z-index:1;
+}

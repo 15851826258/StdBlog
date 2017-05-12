@@ -18,7 +18,22 @@ namespace StdBlog.Controllers
 
         public ActionResult UserLog()
         {
+            //if (Session["id"] != null) return RedirectToAction("UserHome", "m_User");
             return View();
+        }
+        public ActionResult UserLogout()
+        {
+            Session["id"] = null;
+            Session["name"] = null;
+            return RedirectToAction("UserLog", "Log");
+        }
+        public ActionResult regc1()
+        {
+            return View();
+        }
+        public ActionResult regc2()
+        {
+            return RedirectToAction("UserHome", "m_User");
         }
 
         public ActionResult UserLogA()
@@ -35,8 +50,10 @@ namespace StdBlog.Controllers
         {
             var bol = m_UserController.Vertify(Request["inputEmail"], Request["inputPassword"]);
             if (!bol) return RedirectToAction("UserLogA", "Log");
-            Session["id"] = m_UserController.getID(Request["inputEmail"]);
-            return View();
+            var user = m_UserController.getUserPac(m_UserController.getID(Request["inputEmail"]));
+            Session["id"] = user.ID;
+            Session["name"] = user.name;
+            return RedirectToAction("UserHome", "m_User");
         }
 
 
