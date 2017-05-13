@@ -12,9 +12,9 @@ namespace StdBlog.Controllers
 {
     public class m_UserController : Controller
     {
-        static private m_UserContext db1 = new m_UserContext();
         public static bool Vertify(string uid, string pw)
         {
+            m_UserContext db1 = new m_UserContext();
             string pws = Helper.AESHelper.Encrypt(pw);
             foreach (var t in db1.m_Users)
             {
@@ -22,14 +22,24 @@ namespace StdBlog.Controllers
             }
             return false;
         }
+
         public static int getID(string uid)
         {
+            m_UserContext db1 = new m_UserContext();
             foreach (var t in db1.m_Users)
                 if (t.loginid == uid) return t.ID;
             return -1;
         }
+        public static m_User getUserPac(string username)
+        {
+            m_UserContext db1 = new m_UserContext();
+            foreach (var t in db1.m_Users)
+                if (t.name == username) return t;
+            return null;
+        }
         public static m_User getUserPac(int id)
         {
+            m_UserContext db1 = new m_UserContext();
             if (id == -1) return null;
             foreach (var t in db1.m_Users)
                 if (t.ID == id) return t;

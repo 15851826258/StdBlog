@@ -10,7 +10,7 @@ namespace StdBlog.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("userlog","log");
         }
 
         public ActionResult About()

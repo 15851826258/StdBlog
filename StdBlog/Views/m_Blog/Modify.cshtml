@@ -1,23 +1,20 @@
 ﻿@model StdBlog.Models.m_Blog
 @{
     ViewBag.Title = "Modify";
-    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+    Layout = "~/Views/m_User/_UserLayout.cshtml";
 }
 
 @using (Html.BeginForm())
 {
-    <div class="form-horizontal">
-        <h4>m_Blog</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
-            </div>
+
+        <div class="input-group" style="margin:20px">
+            <span class="input-group-addon" id="basic-addon3">Title</span>
+            @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control", placeholder = "Input your title", id = "title",name = "title",type = "text" } })
+            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
@@ -38,13 +35,11 @@
         </script>
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" onclick="bsClicked()" id="bs" />
 
-            </div>
+        <div style="margin:20px">
+            <input class="btn btn-success" type="submit" value="Save"  onclick="bsClicked()" id="bs" />
         </div>
-    </div>
+
 
 
 

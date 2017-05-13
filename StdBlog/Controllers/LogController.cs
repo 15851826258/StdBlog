@@ -19,10 +19,24 @@ namespace StdBlog.Controllers
         public ActionResult UserLog()
         {
             //if (Session["id"] != null) return RedirectToAction("UserHome", "m_User");
+
+            if (Request.Cookies["stdblogql"] != null)
+            {
+                string str = Request.Cookies["stdblogql"].Value;
+                if (str.StartsWith("+"))
+                {
+                    string username = str.Substring(1);
+                    var user = m_UserController.getUserPac(username);
+                    Session["id"] = user.ID;
+                    Session["name"] = user.name;
+                    return RedirectToAction("UserHome", "m_User");
+                }
+            }
             return View();
         }
         public ActionResult UserLogout()
         {
+            Response.Cookies["stdblogql"].Value = "";
             Session["id"] = null;
             Session["name"] = null;
             return RedirectToAction("UserLog", "Log");
@@ -53,6 +67,7 @@ namespace StdBlog.Controllers
             var user = m_UserController.getUserPac(m_UserController.getID(Request["inputEmail"]));
             Session["id"] = user.ID;
             Session["name"] = user.name;
+            if (Request["cb"].StartsWith("true")) Response.Cookies.Add(new HttpCookie("stdblogql", "+" + user.name));
             return RedirectToAction("UserHome", "m_User");
         }
 
