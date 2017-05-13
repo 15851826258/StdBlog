@@ -1,11 +1,44 @@
 ﻿
 @{
     ViewBag.Title = "CreateBlog";
-    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+    Layout = "~/Views/m_User/_UserLayout.cshtml";
 }
 
-<h2>CreateBlog</h2>
+
+@using (Html.BeginForm("Exc", "Umeditor", FormMethod.Post, new { @class = "f-non", id = "f-non" }))
+{
+    <div class="input-group" style="margin:20px">
+        <span class="input-group-addon" id="basic-addon3">Title</span>
+        <input placeholder="Input your title" class="form-control" id="title" name="title" type="text" />
+
+    </div>
+        <input class="i-non" id="info" name="info" type="hidden" />
+}
+<!--style给定宽度可以影响编辑器的最终宽度-->
+@Styles.Render("~/Content/umeditor/themes/default/css/umeditor.css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Content/umeditor/umeditor.config.js")
+@Scripts.Render("~/Content/umeditor/umeditor.min.js")
+@Scripts.Render("~/Content/umeditor/lang/zh-cn/zh-cn.js")
+<script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
+    <p>快！在这写！</p>
+</script>
+<div style="margin:20px">
+    <input class="btn btn-success" onclick="btn_esClicked()" value="Submit" />
+    <input class="btn btn-warning" onclick="btn_erClicked()" value="Cancel" />
+</div>
 
 
-Userid:@Session["id"]<hr/>
-@{Html.RenderAction("Editor", "UmEditor");}
+<script type="text/javascript">
+        //实例化编辑器
+        var um = UM.getEditor('myEditor');
+
+        function btn_esClicked() {
+            document.getElementById("info").value = UM.getEditor('myEditor').getContent();
+            document.getElementById("f-non").submit();
+        }
+        function btn_erClicked() {
+            window.history.back(); location.reload();
+        }
+</script>
+

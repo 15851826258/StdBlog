@@ -16,7 +16,7 @@ namespace StdBlog.Controllers
         public ActionResult Exc()
         {
             m_BlogController.createBlog(Request.Unvalidated.Form["info"], (int)Session["id"], Request["title"]);
-            return RedirectToAction("Index", "m_Blog");
+            return RedirectToAction("UserHome", "m_User");
         }
 
     }

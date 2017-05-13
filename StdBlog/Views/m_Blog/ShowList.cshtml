@@ -1,0 +1,59 @@
+﻿@model IEnumerable<StdBlog.Models.m_Blog>
+
+@{
+    ViewBag.Title = "ShowList";
+    Layout = "~/Views/m_User/_UserLayout.cshtml";
+}
+
+
+
+@foreach (var item in Model)
+{
+    <hr />
+    <div class="panel panel-primary ">
+        <div class="panel-heading">
+            @Html.DisplayFor(title => item.title)
+            <div class="btn-group" role="group" style="float:right" aria-label="...">
+                @using (Html.BeginForm("Modify", "m_Blog", new { id = item.ID },FormMethod.Get))
+                {
+                    <button type="submit" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </button>
+                }
+
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    Visit
+                </th>
+                <th>
+                    Last Modify Time
+                </th>
+            </tr>
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.visit_count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.last_modify_time)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <div class="panel panel-primary ">
+                        <div class="panel-body">
+                            @{Html.RenderAction("Show", "m_Blog", new { id = item.ID });}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+
+        </table>
+    </div>
+                                }

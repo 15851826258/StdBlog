@@ -16,7 +16,7 @@ namespace StdBlog.Controllers
 
 
         #region APIS
-        static IEnumerable<m_sensitivekeyword> skys= (new m_sensitivekeywordContext()).m_sensitivekeywords.ToList();
+        static IEnumerable<m_sensitivekeyword> skys = (new m_sensitivekeywordContext()).m_sensitivekeywords.ToList();
         private static string filter(string content)
         {
             foreach (var t in skys)
@@ -65,11 +65,8 @@ namespace StdBlog.Controllers
         #endregion
 
         #region Ctrl funcs
-        public ActionResult CreateBlog()
-        {
-            return View();
-        }
 
+        #region ori
         // GET: m_Blog
         public ActionResult Index()
         {
@@ -90,29 +87,11 @@ namespace StdBlog.Controllers
             }
             return View(m_Blog);
         }
-        public ActionResult Show(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            m_Blog m_Blog = db.m_Blogs.Find(id);
-            if (m_Blog == null)
-            {
-                return HttpNotFound();
-            }
-            return View(m_Blog);
-        }
-
         // GET: m_Blog/Create
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: m_Blog/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,ownerid,title,content,visit_count,last_modify_time,classify")] m_Blog m_Blog)
@@ -124,32 +103,6 @@ namespace StdBlog.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(m_Blog);
-        }
-        [HttpPost]
-        public ActionResult Modify([Bind(Include = "ID,ownerid,title,content,visit_count,last_modify_time,classify")] m_Blog m_Blog)
-        {
-            if (ModelState.IsValid)
-            {
-                m_Blog.last_modify_time = DateTime.Now;
-                m_Blog.content = filter(Request.Unvalidated.Form["fc"]);
-                db.Entry(m_Blog).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(m_Blog);
-        }
-        public ActionResult Modify(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            m_Blog m_Blog = db.m_Blogs.Find(id);
-            if (m_Blog == null)
-            {
-                return HttpNotFound();
-            }
             return View(m_Blog);
         }
 
@@ -217,6 +170,64 @@ namespace StdBlog.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        #endregion
+        public ActionResult CreateBlog()
+        {
+            return View();
+        }
+
+        public ActionResult Show(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            m_Blog m_Blog = db.m_Blogs.Find(id);
+            if (m_Blog == null)
+            {
+                return HttpNotFound();
+            }
+            return View(m_Blog);
+        }
+
+        public ActionResult Modify(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            m_Blog m_Blog = db.m_Blogs.Find(id);
+            if (m_Blog == null)
+            {
+                return HttpNotFound();
+            }
+            return View(m_Blog);
+        }
+
+        [HttpPost]
+        public ActionResult Modify([Bind(Include = "ID,ownerid,title,content,visit_count,last_modify_time,classify")] m_Blog m_Blog)
+        {
+            if (ModelState.IsValid)
+            {
+                m_Blog.last_modify_time = DateTime.Now;
+                m_Blog.content = filter(Request.Unvalidated.Form["fc"]);
+                m_Blog.ownerid = (int)Session["id"];
+                db.Entry(m_Blog).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("UserHome", "m_User");
+            }
+            return View(m_Blog);
+        }
+
+
+
+        public ActionResult ShowList()
+        {
+            var lis = from t in db.m_Blogs.ToList()
+                      where t.ownerid == (int)Session["id"]
+                      select t;
+            return View(lis);
         }
         #endregion
     }
