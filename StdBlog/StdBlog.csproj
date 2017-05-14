@@ -321,8 +321,6 @@
     <Content Include="Views\Log\_UserregLayout.cshtml" />
     <Content Include="Views\Log\AdminLog.cshtml" />
     <Content Include="Views\Log\UserLog.cshtml" />
-    <Content Include="Views\Log\ALC.cshtml" />
-    <Content Include="Views\Log\ULC.cshtml" />
     <Content Include="Views\Log\UserReg.cshtml" />
     <Content Include="Views\Log\UserLogA.cshtml" />
     <Content Include="Views\Shared\_EmptyLayout.cshtml" />
@@ -340,7 +338,6 @@
     <Content Include="Views\m_User\UserHome.cshtml" />
     <Content Include="Views\Log\regc1.cshtml" />
     <Content Include="Views\Log\regc2.cshtml" />
-    <Content Include="Views\Log\UserLogout.cshtml" />
     <Content Include="Views\m_sensitivekeyword\Create.cshtml" />
     <Content Include="Views\m_sensitivekeyword\Delete.cshtml" />
     <Content Include="Views\m_sensitivekeyword\Details.cshtml" />
@@ -353,6 +350,9 @@
     <Content Include="Views\m_User\Searchu.cshtml" />
     <Content Include="Views\m_User\Searchb.cshtml" />
     <Content Include="Views\m_Blog\ShowBlog.cshtml" />
+    <Content Include="Views\m_Admin\AdminHome.cshtml" />
+    <Content Include="Views\m_Admin\_AdminLayout.cshtml" />
+    <Content Include="Views\m_Admin\_AdminLayout_sk.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\umeditor\net\upload\" />

@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = "~/Views/m_Admin/_AdminLayout.cshtml";
+}
+
+<h2>StdBlog Admin</h2>
+<div>
+    <h4>Overview</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            User count
+        </dt>
+
+        <dd>
+            @ViewData["usercount"]
+        </dd>
+
+        <dt>
+            Blog count
+        </dt>
+        <dd>
+            @ViewData["blogcount"]
+        </dd>
+
+        <dt>
+            Host IP
+        </dt>
+        <dd>
+            @Request.UserHostAddress
+        </dd>
+    </dl>
+</div>

@@ -12,6 +12,7 @@ namespace StdBlog.Controllers
 {
     public class m_AdminController : Controller
     {
+        #region api
         static m_AdminController()
         {
             m_AdminContext db = new m_AdminContext();
@@ -25,10 +26,40 @@ namespace StdBlog.Controllers
                 db.SaveChanges();
             }
         }
-
+        public static bool Vertify(string uid, string pw)
+        {
+            m_AdminContext db = new m_AdminContext();
+            string pws = Helper.AESHelper.Encrypt(pw);
+            foreach (var t in db.m_Admin)
+            {
+                if (t.loginid == uid & t.password == pws) return true;
+            }
+            return false;
+        }
+        public static m_Admin getAdminPac(int id)
+        {
+            m_AdminContext db = new m_AdminContext();
+            foreach (var t in db.m_Admin)
+                if (t.ID == id) return t;
+            return null;
+        }
+        public static m_Admin getAdminPac(string loginid)
+        {
+            m_AdminContext db = new m_AdminContext();
+            foreach (var t in db.m_Admin)
+                if (t.loginid == loginid)
+                    return t;
+            return null;
+        }
+        #endregion
         private m_AdminContext db = new m_AdminContext();
 
-
+        public ActionResult AdminHome()
+        {
+            ViewData.Add("usercount", "" + (new m_UserContext()).m_Users.ToList().Count());
+            ViewData.Add("blogcount", "" + (new m_BlogContext()).m_Blogs.ToList().Count());
+            return View();
+        }
 
 
 

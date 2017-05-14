@@ -15,7 +15,12 @@ namespace StdBlog.Controllers
         {
             return View();
         }
-
+        public ActionResult AdminLogout()
+        {
+            Session["aid"] = null;
+            Session["aname"] = null;
+            return RedirectToAction("AdminLog", "Log");
+        }
         public ActionResult UserLog()
         {
             //if (Session["id"] != null) return RedirectToAction("UserHome", "m_User");
@@ -57,13 +62,18 @@ namespace StdBlog.Controllers
 
         public ActionResult ALC()
         {
-            return View();
+            if (!m_AdminController.Vertify(Request["inputEmail"], Request["inputPassword"]))
+                return RedirectToAction("AdminLog", "Log");
+            var admin = m_AdminController.getAdminPac(Request["inputEmail"]);
+            Session["aid"] = admin.ID;
+            Session["aname"] = admin.name;
+            return RedirectToAction("AdminHome", "m_Admin");
         }
 
         public ActionResult ULC()
         {
-            var bol = m_UserController.Vertify(Request["inputEmail"], Request["inputPassword"]);
-            if (!bol) return RedirectToAction("UserLogA", "Log");
+            if (!m_UserController.Vertify(Request["inputEmail"], Request["inputPassword"]))
+                return RedirectToAction("UserLogA", "Log");
             var user = m_UserController.getUserPac(m_UserController.getID(Request["inputEmail"]));
             Session["id"] = user.ID;
             Session["name"] = user.name;
