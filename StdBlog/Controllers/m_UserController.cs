@@ -12,6 +12,9 @@ namespace StdBlog.Controllers
 {
     public class m_UserController : Controller
     {
+        private m_UserContext db = new m_UserContext();
+
+        #region apis
         public static bool Vertify(string uid, string pw)
         {
             m_UserContext db1 = new m_UserContext();
@@ -45,19 +48,23 @@ namespace StdBlog.Controllers
                 if (t.ID == id) return t;
             return null;
         }
-        private m_UserContext db = new m_UserContext();
 
-
-        public ActionResult UserHome()
+        public static string getName(int id)
         {
-            return View();
+            m_UserContext db1 = new m_UserContext();
+            if (id == -1) return null;
+            foreach (var t in db1.m_Users)
+                if (t.ID == id) return t.name;
+            return null;
         }
+        #endregion
+
+        #region ori
         // GET: m_User
         public ActionResult Index()
         {
             return View(db.m_Users.ToList());
         }
-
         // GET: m_User/Details/5
         public ActionResult Details(int? id)
         {
@@ -166,5 +173,45 @@ namespace StdBlog.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
+        public ActionResult UserHome()
+        {
+            return View();
+        }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+        public ActionResult Searchu()
+        {
+            var olis = db.m_Users.ToList();
+            var lis = from t in olis
+                      where t.name.Contains(Request["sstr"])
+                      select t;
+            return View(lis.ToList());
+        }
+        public ActionResult Searchb()
+        {
+            return View(from t in (new m_BlogContext()).m_Blogs.ToList()
+                        where t.title.Contains(Request["sstr"])
+                        select t);
+        }
+
+        public ActionResult UserBinfo(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            m_User m_User = db.m_Users.Find(id);
+            if (m_User == null)
+            {
+                return HttpNotFound();
+            }
+            return View(m_User);
+        }
+
     }
 }

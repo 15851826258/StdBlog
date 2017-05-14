@@ -63,5 +63,24 @@ namespace StdBlog.Helper
 
     }
 
-
+    public class UserFollows
+    {
+        public static string Encode(IEnumerable<int> IdList)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(var t in IdList)
+            {
+                sb.Append('|');
+                sb.Append(t);
+            }
+            return sb.ToString().Substring(1);
+        }
+        public static IEnumerable<int> Decode(string str)
+        {
+            if (str == "") return new List<int>();
+            return from t in str.Split('|')
+                   select int.Parse(t)
+                   ;
+        }
+    }
 }

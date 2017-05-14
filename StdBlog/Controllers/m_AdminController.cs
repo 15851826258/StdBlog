@@ -12,8 +12,27 @@ namespace StdBlog.Controllers
 {
     public class m_AdminController : Controller
     {
+        static m_AdminController()
+        {
+            m_AdminContext db = new m_AdminContext();
+            if (db.m_Admin.Count() == 0)
+            {
+                var obj = new m_Admin();
+                obj.loginid = "admin@stdblog.com";
+                obj.password = Helper.AESHelper.Encrypt("admin");
+                obj.name = "Tsual Gwenix";
+                db.m_Admin.Add(obj);
+                db.SaveChanges();
+            }
+        }
+
         private m_AdminContext db = new m_AdminContext();
 
+
+
+
+
+        #region ori
         // GET: m_Admin
         public ActionResult Index()
         {
@@ -123,5 +142,6 @@ namespace StdBlog.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
     }
 }

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<StdBlog.Models.m_Blog>
+
+
+
+<div class="list-group">
+    @if (Model.Count() == 0) { Html.Encode("<a class=\"list - group - item\">No result!</a>"); }
+    @foreach (var t in Model)
+    {
+        @Html.ActionLink(t.title, "ShowBlog", "m_Blog", new { id = t.ID }, new { @class = "list-group-item" });
+    }
+</div>

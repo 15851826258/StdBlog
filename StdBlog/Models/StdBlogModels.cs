@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Collections.Generic;
 
 
 namespace StdBlog.Models
@@ -101,4 +102,10 @@ namespace StdBlog.Models
         public DbSet<m_sensitivekeyword> m_sensitivekeywords { get; set; }
     }
     #endregion
+
+    public class m_search<T1,T2>
+    {
+        public List<T1> dat1 { get; set; }
+        public List<T2> dat2 { get; set; }
+    }
 }

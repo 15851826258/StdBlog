@@ -191,6 +191,21 @@ namespace StdBlog.Controllers
             return View(m_Blog);
         }
 
+        public ActionResult ShowBlog(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            m_Blog m_Blog = db.m_Blogs.Find(id);
+            if (m_Blog == null)
+            {
+                return HttpNotFound();
+            }
+            ViewData.Add("oid", m_UserController.getName(m_Blog.ownerid));
+            return View(m_Blog);
+        }
+
         public ActionResult Modify(int? id)
         {
             if (id == null)
@@ -220,7 +235,13 @@ namespace StdBlog.Controllers
             return View(m_Blog);
         }
 
-
+        public ActionResult uShowList(int? id)
+        {
+            var lis = from t in db.m_Blogs.ToList()
+                      where t.ownerid == id
+                      select t;
+            return View(lis);
+        }
 
         public ActionResult ShowList()
         {

@@ -347,6 +347,12 @@
     <Content Include="Views\m_sensitivekeyword\Edit.cshtml" />
     <Content Include="Views\m_sensitivekeyword\Index.cshtml" />
     <Content Include="Views\m_Blog\ShowList.cshtml" />
+    <Content Include="Views\m_User\Search.cshtml" />
+    <Content Include="Views\m_User\UserBinfo.cshtml" />
+    <Content Include="Views\m_Blog\uShowList.cshtml" />
+    <Content Include="Views\m_User\Searchu.cshtml" />
+    <Content Include="Views\m_User\Searchb.cshtml" />
+    <Content Include="Views\m_Blog\ShowBlog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\umeditor\net\upload\" />
