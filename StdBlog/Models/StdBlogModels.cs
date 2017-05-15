@@ -30,7 +30,7 @@ namespace StdBlog.Models
     #region Admin
     {
         public int ID { get; set; }
-        [Display(Name ="Email")]
+        [Display(Name = "Email")]
         public string loginid { get; set; }
         [Display(Name = "Password")]
         public string password { get; set; }
@@ -103,9 +103,19 @@ namespace StdBlog.Models
     }
     #endregion
 
-    public class m_search<T1,T2>
+    public class m_recblog
+    #region 
     {
-        public List<T1> dat1 { get; set; }
-        public List<T2> dat2 { get; set; }
+        public int ID { get; set; }
+        public Database pushtime { get; set; }
+        public Database deletetime { get; set; }
+        public int blogid { get; set; }
     }
+    public class m_recblogContext : DbContext
+    {
+        public m_recblogContext() : base("name=StdBlogContext") { }
+
+        public DbSet<m_recblog> m_recblogs { get; set; }
+    }
+    #endregion
 }
