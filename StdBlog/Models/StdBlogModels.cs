@@ -26,6 +26,34 @@ namespace StdBlog.Models
     }
     #endregion
 
+    public class m_BlogCommment
+    #region 
+    {
+        public int ID { get; set; }
+        public DateTime time { get; set; }
+        public int senderid { get; set; }
+        public int blogid { get; set; }
+        public string content { get; set; }
+    }
+    public class m_BlogCommmentContext : DbContext
+    {
+        public m_BlogCommmentContext() : base("name=StdBlogContext") { }
+
+        public DbSet<m_BlogCommment> m_BlogCommments { get; set; }
+    }
+    #endregion
+
+    public class m_BlogCommment_name
+    {
+        public m_BlogCommment bc { get; set; }
+        public string name { set; get; }
+        public m_BlogCommment_name(m_BlogCommment bc, string name)
+        {
+            this.bc = bc;
+            this.name = name;
+        }
+    }
+
     public class m_Admin
     #region Admin
     {

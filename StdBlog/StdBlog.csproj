@@ -353,6 +353,8 @@
     <Content Include="Views\m_Admin\AdminHome.cshtml" />
     <Content Include="Views\m_Admin\_AdminLayout.cshtml" />
     <Content Include="Views\m_Admin\_AdminLayout_sk.cshtml" />
+    <Content Include="Views\m_Blog\sShowBlog.cshtml" />
+    <Content Include="Views\m_Blog\ShowComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\umeditor\net\upload\" />

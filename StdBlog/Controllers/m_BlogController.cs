@@ -177,6 +177,28 @@ namespace StdBlog.Controllers
             return View();
         }
 
+        public ActionResult Comment(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            m_BlogCommment bc = new m_BlogCommment();
+            bc.blogid = (int)id;
+            bc.senderid = (int)Session["id"];
+            bc.time = DateTime.Now;
+            bc.content = Request["ccontent"];
+            var db = new m_BlogCommmentContext();
+            db.m_BlogCommments.Add(bc);
+            db.SaveChangesAsync();
+            return RedirectToAction("ShowBlog", new { id = id });
+        }
+
+        public ActionResult ShowComment(int? id)
+        {
+            var lis = from t in (new m_BlogCommmentContext()).m_BlogCommments.ToList()
+                      where t.blogid == id
+                      select new m_BlogCommment_name(t,m_UserController.getName(t.senderid));
+            
+            return View(lis);
+        }
         public ActionResult Show(int? id)
         {
             if (id == null)
@@ -191,7 +213,7 @@ namespace StdBlog.Controllers
             return View(m_Blog);
         }
 
-        public ActionResult ShowBlog(int? id)
+        public ActionResult sShowBlog(int? id)
         {
             if (id == null)
             {
@@ -203,6 +225,28 @@ namespace StdBlog.Controllers
                 return HttpNotFound();
             }
             ViewData.Add("oid", m_UserController.getName(m_Blog.ownerid));
+            return View(m_Blog);
+        }
+
+        public ActionResult ShowBlog(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            m_Blog m_Blog = db.m_Blogs.Find(id);
+            if (m_Blog.ownerid == (int)Session["id"]) return RedirectToAction("sShowBlog", new { id = id });
+            if (m_Blog == null)
+            {
+                return HttpNotFound();
+            }
+            ViewData.Add("oid", m_UserController.getName(m_Blog.ownerid));
+
+            m_Blog.visit_count++;
+            db.Entry(m_Blog).State = EntityState.Modified;
+            db.SaveChanges();
+
             return View(m_Blog);
         }
 

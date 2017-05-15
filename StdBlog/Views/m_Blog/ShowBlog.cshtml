@@ -7,22 +7,22 @@
 
 <div class="panel panel-primary ">
     <div class="panel-heading">
+        <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
         @Html.DisplayFor(title => Model.title)
     </div>
     <table class="table">
+        <!--header-->
         <tr>
             <th>
                 Visit
             </th>
             <th>
-                Last Modify Time
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>Last Modify Time
             </th>
             <th>
-                Blogger
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>Blogger
             </th>
         </tr>
-
-
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => Model.visit_count)
@@ -31,27 +31,70 @@
                 @Html.DisplayFor(modelItem => Model.last_modify_time)
             </td>
             <td>
-                @Html.ActionLink((string)ViewData["oid"], "UserBinfo", "m_User", new { id = Model.ownerid }, new {  })
+                @Html.ActionLink((string)ViewData["oid"], "UserBinfo", "m_User", new { id = Model.ownerid }, new { })
             </td>
         </tr>
+        <!--content-->
         <tr>
-            <td colspan="5">
-                <div class="panel panel-primary ">
+            <td colspan="3">
+                <div class="panel panel-info ">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                        Content
+                    </div>
                     <div class="panel-body">
                         @{Html.RenderAction("Show", "m_Blog", new { id = Model.ID });}
                     </div>
                 </div>
             </td>
         </tr>
-
-
-
+        <!--comment list-->
+        <tr>
+            <td colspan="3">
+                @{Html.RenderAction("ShowComment", new { id = Model.ID }); }
+            </td>
+        </tr>
+        <!--send comment-->
+        <tr>
+            <td colspan="3">
+                <div class="panel panel-info ">
+                    <div class="panel-heading">
+                        Say something..
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Content" id="cinput">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" onclick="uploadcomment()">Submit</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
     </table>
     <div class="panel-footer">
         <a onclick="goback()">Back</a>
     </div>
 </div>
+
+@using (Html.BeginForm("Comment", "m_Blog", new { id = Model.ID }, FormMethod.Post, new { id = "cform" }))
+{
+    <input type="hidden" id="ccontent" name="ccontent" />
+}
+
+
+
 <script type="text/javascript">
+    function uploadcomment() {
+        document.getElementById("ccontent").value = document.getElementById("cinput").value;
+        document.getElementById("cform").submit();
+
+    }
     function goback() {
         window.history.back(); location.reload();
     }

@@ -1,0 +1,71 @@
+﻿@model StdBlog.Models.m_Blog
+
+@{
+    Layout = "~/Views/m_User/_UserLayout.cshtml";
+}
+
+
+<div class="panel panel-primary ">
+    <div class="panel-heading">
+        @Html.DisplayFor(title => Model.title)
+        <div class="btn-group" role="group" style="float:right" aria-label="...">
+            @using (Html.BeginForm("Modify", "m_Blog", new { id = Model.ID }, FormMethod.Get))
+            {
+                <button type="submit" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button>
+            }
+
+        </div>
+
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Visit
+            </th>
+            <th>
+                Last Modify Time
+            </th>
+            <th>
+                Blogger
+            </th>
+        </tr>
+
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.visit_count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.last_modify_time)
+            </td>
+            <td>
+                @Html.ActionLink((string)ViewData["oid"], "UserBinfo", "m_User", new { id = Model.ownerid }, new { })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <div class="panel panel-primary ">
+                    <div class="panel-body">
+                        @{Html.RenderAction("Show", "m_Blog", new { id = Model.ID });}
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+
+
+    </table>
+
+    <div class="panel-footer">
+        <a onclick="goback()">Back</a>
+    </div>
+</div>
+<script type="text/javascript">
+    function goback() {
+        window.history.back(); location.reload();
+    }
+</script>
+
+

@@ -25,7 +25,13 @@ namespace StdBlog.Controllers
             }
             return false;
         }
-
+        public static string getName(int uid)
+        {
+            m_UserContext db1 = new m_UserContext();
+            foreach (var t in db1.m_Users)
+                if (t.ID == uid) return t.name;
+            return "";
+        }
         public static int getID(string uid)
         {
             m_UserContext db1 = new m_UserContext();
@@ -49,14 +55,6 @@ namespace StdBlog.Controllers
             return null;
         }
 
-        public static string getName(int id)
-        {
-            m_UserContext db1 = new m_UserContext();
-            if (id == -1) return null;
-            foreach (var t in db1.m_Users)
-                if (t.ID == id) return t.name;
-            return null;
-        }
         #endregion
 
         #region ori

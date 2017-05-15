@@ -1,0 +1,35 @@
+﻿@model IEnumerable<StdBlog.Models.m_BlogCommment_name>
+
+@{
+    Layout = null;
+}
+
+<div class="panel panel-info ">
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+        Comment
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            @foreach (var t in Model)
+            {
+                <tr>
+                    <td colspan="10">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                @Html.DisplayFor(name => t.name)
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                @Html.DisplayFor(time => t.bc.time)
+                            </div>
+                        </div>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        @Html.DisplayFor(content => t.bc.content)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
