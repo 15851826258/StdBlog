@@ -12,7 +12,9 @@
 
 @Styles.Render("~/Content/carousel.css")
 
+
 <div style="position:absolute;width:100%;top:0px;left:0px;">
+    <!--broadcast-->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -60,5 +62,20 @@
             <span class="sr-only">Next</span>
         </a>
     </div><!-- /.carousel -->
+
+    <div class="container">
+        <!--recommend-->
+        @{Html.RenderAction("ShowBlog", "m_recblog");}
+    </div>
+
+    <hr/>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">&copy; @DateTime.Now.Year - Tsual Gwenix</p>
+        </div>
+    </footer>
 </div>
+
+
+
 

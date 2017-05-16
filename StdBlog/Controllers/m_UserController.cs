@@ -180,6 +180,7 @@ namespace StdBlog.Controllers
 
         public ActionResult Search()
         {
+            if (Request["sstr"].Length <= 0) return RedirectToAction("Return", "Home");
             return View();
         }
         public ActionResult Searchu()

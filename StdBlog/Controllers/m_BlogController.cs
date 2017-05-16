@@ -180,6 +180,7 @@ namespace StdBlog.Controllers
         public ActionResult Comment(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (Request["ccontent"].Length <= 0) return RedirectToAction("return", "home");
             m_BlogCommment bc = new m_BlogCommment();
             bc.blogid = (int)id;
             bc.senderid = (int)Session["id"];
@@ -195,8 +196,8 @@ namespace StdBlog.Controllers
         {
             var lis = from t in (new m_BlogCommmentContext()).m_BlogCommments.ToList()
                       where t.blogid == id
-                      select new m_BlogCommment_name(t,m_UserController.getName(t.senderid));
-            
+                      select new m_BlogCommment_name(t, m_UserController.getName(t.senderid));
+
             return View(lis);
         }
         public ActionResult Show(int? id)

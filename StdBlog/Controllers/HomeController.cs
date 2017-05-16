@@ -13,6 +13,11 @@ namespace StdBlog.Controllers
             return RedirectToAction("userlog","log");
         }
 
+        public ActionResult Return()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

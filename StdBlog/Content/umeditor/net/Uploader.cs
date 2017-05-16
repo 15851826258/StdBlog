@@ -61,7 +61,7 @@ namespace umeditor
                     URL = pathbase + filename;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 state = "未知错误";
                 URL = "";

@@ -373,12 +373,9 @@
     <Content Include="Views\m_Blog\sShowBlog.cshtml" />
     <Content Include="Views\m_Blog\ShowComment.cshtml" />
     <Content Include="Views\m_Admin\_AdminLayout_rb.cshtml" />
-    <Content Include="Views\m_recblog\Create.cshtml" />
-    <Content Include="Views\m_recblog\Delete.cshtml" />
-    <Content Include="Views\m_recblog\Details.cshtml" />
-    <Content Include="Views\m_recblog\Edit.cshtml" />
-    <Content Include="Views\m_recblog\Index.cshtml" />
     <Content Include="Views\m_recblog\Home.cshtml" />
+    <Content Include="Views\Home\Return.cshtml" />
+    <Content Include="Views\m_recblog\ShowBlog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\umeditor\net\upload\" />
