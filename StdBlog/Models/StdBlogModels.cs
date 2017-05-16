@@ -54,6 +54,8 @@ namespace StdBlog.Models
         }
     }
 
+
+
     public class m_Admin
     #region Admin
     {
@@ -135,8 +137,8 @@ namespace StdBlog.Models
     #region 
     {
         public int ID { get; set; }
-        public Database pushtime { get; set; }
-        public Database deletetime { get; set; }
+        public DateTime pushtime { get; set; }
+        public DateTime deletetime { get; set; }
         public int blogid { get; set; }
     }
     public class m_recblogContext : DbContext
@@ -146,4 +148,10 @@ namespace StdBlog.Models
         public DbSet<m_recblog> m_recblogs { get; set; }
     }
     #endregion
+
+    public class m_recblog_blog
+    {
+        public IEnumerable<m_Blog> blogs { get; set; }
+        public IEnumerable<m_Blog> recs { get; set; }
+    }
 }

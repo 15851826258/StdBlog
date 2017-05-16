@@ -21,9 +21,9 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/m_admin/adminhome">Home<span class="sr-only">(current)</span></a></li>
-                    <li><a href="/m_sensitivekeyword/index">Sensitive keys</a></li>
-                    <li><a href="/m_recblog/home">Recommend blog</a></li>
+                    <li><a href="/m_admin/adminhome">Home<span class="sr-only">(current)</span></a></li>
+                    <li><a href="/m_sensitivekeyword">Sensitive keys</a></li>
+                    <li class="active"><a href="/m_recblog/home">Recommend blog</a></li>
                 </ul>
 
                 @using (Html.BeginForm("AdminLogout", "Log", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
@@ -46,3 +46,4 @@
     @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>
+

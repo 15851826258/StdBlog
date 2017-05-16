@@ -1,0 +1,76 @@
+﻿@model StdBlog.Models.m_recblog_blog
+
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/m_Admin/_AdminLayout_rb.cshtml";
+}
+
+
+
+
+<div class="panel panel-info ">
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-subtitles" aria-hidden="true"></span>
+        Recommend blog
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            @foreach (var t in Model.blogs)
+            {
+                <tr>
+                    <td colspan="10">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                @Html.DisplayFor(title => t.title)
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                @Html.DisplayFor(viist => t.visit_count)
+                            </div>
+                            <div class="col-lg-3">
+                                @Html.ActionLink("recommend", "Recommend", new { id = t.ID })
+                            </div>
+                        </div>
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        @{Html.RenderAction("Show", "m_Blog", new { id = t.ID });}
+                    </td>
+                </tr>
+                            }
+        </table>
+
+
+    </div>
+    <div class="panel-footer">
+        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+        Recommended
+    </div>
+    <div class="panel-body">
+        <table class="table">
+
+            @foreach (var t in Model.recs)
+            {
+                <tr>
+                    <td colspan="10">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                @Html.DisplayFor(title => t.title)
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                @Html.DisplayFor(viist => t.visit_count)
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                @Html.ActionLink("delete", "Delrec", new { id = t.ID })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>

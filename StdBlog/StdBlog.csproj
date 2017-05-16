@@ -153,6 +153,7 @@
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\m_AdminController.cs" />
     <Compile Include="Controllers\m_BlogController.cs" />
+    <Compile Include="Controllers\m_recblogController.cs" />
     <Compile Include="Controllers\m_sensitivekeywordController.cs" />
     <Compile Include="Controllers\m_UserController.cs" />
     <Compile Include="Controllers\UmeditorController.cs" />
@@ -170,11 +171,21 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap4\css\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap4\css\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap4\css\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap4\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap4\css\bootstrap.css" />
+    <Content Include="Content\bootstrap4\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap4\js\bootstrap.js" />
+    <Content Include="Content\bootstrap4\js\bootstrap.min.js" />
+    <Content Include="Content\carousel.css" />
     <Content Include="Content\particles\app.js" />
     <Content Include="Content\particles\lib\stats.js" />
     <Content Include="Content\particles\particles.js" />
     <Content Include="Content\particles\particles.min.js" />
     <Content Include="Content\particles\style.css" />
+    <Content Include="Content\pic\btindex.png" />
     <Content Include="Content\signin.css" />
     <Content Include="Content\umeditor\dialogs\emotion\emotion.css" />
     <Content Include="Content\umeditor\dialogs\emotion\emotion.js" />
@@ -279,6 +290,12 @@
     <Content Include="Content\umeditor\third-party\mathquill\font\Symbola.otf" />
     <Content Include="Content\umeditor\third-party\mathquill\font\Symbola.ttf" />
     <Content Include="Content\umeditor\third-party\mathquill\font\Symbola.woff" />
+    <Content Include="Content\bootstrap4\css\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap4\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap4\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap4\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap4\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap4\css\bootstrap.min.css.map" />
     <None Include="Properties\PublishProfiles\StdBlog - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\StdBlog - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -355,6 +372,13 @@
     <Content Include="Views\m_Admin\_AdminLayout_sk.cshtml" />
     <Content Include="Views\m_Blog\sShowBlog.cshtml" />
     <Content Include="Views\m_Blog\ShowComment.cshtml" />
+    <Content Include="Views\m_Admin\_AdminLayout_rb.cshtml" />
+    <Content Include="Views\m_recblog\Create.cshtml" />
+    <Content Include="Views\m_recblog\Delete.cshtml" />
+    <Content Include="Views\m_recblog\Details.cshtml" />
+    <Content Include="Views\m_recblog\Edit.cshtml" />
+    <Content Include="Views\m_recblog\Index.cshtml" />
+    <Content Include="Views\m_recblog\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\umeditor\net\upload\" />
