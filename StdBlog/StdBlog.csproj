@@ -180,12 +180,21 @@
     <Content Include="Content\bootstrap4\js\bootstrap.js" />
     <Content Include="Content\bootstrap4\js\bootstrap.min.js" />
     <Content Include="Content\carousel.css" />
+    <Content Include="Content\editors\1\01.txt" />
+    <Content Include="Content\editors\1\jr.jpg" />
+    <Content Include="Content\editors\2\02.txt" />
+    <Content Include="Content\editors\2\QQ图片20170518111130.jpg" />
+    <Content Include="Content\editors\3\03.txt" />
+    <Content Include="Content\editors\3\wxc.jpg" />
     <Content Include="Content\particles\app.js" />
     <Content Include="Content\particles\lib\stats.js" />
     <Content Include="Content\particles\particles.js" />
     <Content Include="Content\particles\particles.min.js" />
     <Content Include="Content\particles\style.css" />
+    <Content Include="Content\pic\4095629-82d3147f2ed43e0c.jpg" />
     <Content Include="Content\pic\btindex.png" />
+    <Content Include="Content\pic\dnc001.png" />
+    <Content Include="Content\pic\wb001.png" />
     <Content Include="Content\signin.css" />
     <Content Include="Content\umeditor\dialogs\emotion\emotion.css" />
     <Content Include="Content\umeditor\dialogs\emotion\emotion.js" />
@@ -320,8 +329,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Log\_UserLogLayout.cshtml" />
     <Content Include="Views\Log\_AdminLogLayout.cshtml" />
@@ -378,6 +385,8 @@
     <Content Include="Views\m_recblog\ShowBlog.cshtml" />
     <Content Include="Views\m_User\sendmes.cshtml" />
     <Content Include="Views\m_User\getmes.cshtml" />
+    <Content Include="Views\Home\Pg_wb.cshtml" />
+    <Content Include="Views\Home\Pg_dnc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\umeditor\net\upload\" />
