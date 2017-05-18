@@ -14,8 +14,8 @@
                 @Model.name
             </div>
             <div class="col-lg-6">
-                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                    @Html.ActionLink("Send message", "sendmes", new { id = Model.ID })
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                @Html.ActionLink("Send message", "sendmes", new { id = Model.ID })
             </div>
         </div>
 
@@ -29,10 +29,8 @@
         @if (Model.gender == StdBlog.Models.m_User.Gender.secret)
         {@(new MvcHtmlString("xxx's blogs"))}
     </div>
-    <div class="row">
-        <div class="col-lg-push-1">
-            @{Html.RenderAction("uShowList", "m_Blog", new { id = Model.ID });}
-        </div>
+    <div style="margin:30px;">
+        @{Html.RenderAction("uShowList", "m_Blog", new { id = Model.ID });}
     </div>
 
     <div class="panel-footer">

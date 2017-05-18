@@ -110,8 +110,9 @@
 
     <div class="container">
         <!--recommend-->
-        <h3>Recommend Blog</h3>
-        <hr />
+        <div class="page-header">
+            <h1 style="margin:50px;"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>Recommend Blog</h1>
+        </div>
         @{Html.RenderAction("ShowBlog", "m_recblog");}
     </div>
 
