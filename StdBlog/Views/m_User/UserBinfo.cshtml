@@ -13,11 +13,9 @@
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 @Model.name
             </div>
-            <div class="col-lg-2">
-                <div class="col-lg-2">
+            <div class="col-lg-6">
                     <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                     @Html.ActionLink("Send message", "sendmes", new { id = Model.ID })
-                </div>
             </div>
         </div>
 

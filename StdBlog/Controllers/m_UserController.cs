@@ -199,6 +199,10 @@ namespace StdBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            var obj = dbmes.m_UserMess.Find((int)id);
+            dbmes.Entry(obj).State = EntityState.Deleted;
+            dbmes.SaveChanges();
             return RedirectToAction("UserHome");
         }
 
@@ -208,7 +212,7 @@ namespace StdBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            mesExcer((int)id, (int)Session["id"], Request["ccontent"]);
+            mesExcer((int)Session["id"], (int)id, Request["ccontent"]);
             return RedirectToAction("UserHome");
         }
 
@@ -217,9 +221,9 @@ namespace StdBlog.Controllers
             var lis = from t in dbmes.m_UserMess.ToList()
                       where t.recieverid == (int)Session["id"]
                       select t;
-            foreach(var t in lis)
+            foreach (var t in lis)
             {
-                ViewData.Add("s" + t.Id, db.m_Users.Find(t.senderid).name);
+                ViewData.Add("s" + t.senderid, db.m_Users.Find(t.senderid).name);
             }
             return View(lis);
         }
@@ -230,8 +234,9 @@ namespace StdBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             ViewData["reciver"] = db.m_Users.Find((int)id).name;
-            return View();
+            return View(db.m_Users.Find((int)id));
         }
 
         public ActionResult UserHome()
@@ -249,6 +254,7 @@ namespace StdBlog.Controllers
             var olis = db.m_Users.ToList();
             var lis = from t in olis
                       where t.name.Contains(Request["sstr"])
+                      && t.ID != (int)Session["id"]
                       select t;
             return View(lis.ToList());
         }
@@ -265,6 +271,7 @@ namespace StdBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            if ((int)id == (int)Session["id"]) return RedirectToAction("ShowList", "m_Blog");
             m_User m_User = db.m_Users.Find(id);
             if (m_User == null)
             {

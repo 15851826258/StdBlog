@@ -1,6 +1,7 @@
-﻿
+﻿@model StdBlog.Models.m_User
+
 @{
-    Layout = null;
+    Layout = "~/Views/m_User/_UserLayout.cshtml";
 }
 
 <div class="panel panel-info ">
@@ -11,7 +12,7 @@
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Content" id="cinput">
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button" onclick="uploadmes()">Send</button>
+                <button class="btn btn-success" type="button" onclick="uploadmes()">Send</button>
             </span>
         </div>
     </div>
@@ -23,7 +24,7 @@
 }
 
 <script type="text/javascript">
-    function uploadcomment() {
+    function uploadmes() {
         document.getElementById("ccontent").value = document.getElementById("cinput").value;
         document.getElementById("cform").submit();
 

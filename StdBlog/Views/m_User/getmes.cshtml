@@ -1,7 +1,7 @@
 ﻿@model  IEnumerable<StdBlog.Models.m_UserMes>
 
 @{
-    Layout = null;
+    Layout = "~/Views/m_User/_UserLayout.cshtml";
 }
 
 <div class="panel panel-info ">
@@ -9,14 +9,14 @@
         Message box
     </div>
     <div class="panel-body">
+        @if (Model.Count() == 0) { @(new MvcHtmlString("None here...")) }
         @foreach (var t in Model)
         {
-
             <div class="row">
 
                 <div class="col-lg-2">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                    @ViewData["t" + t.senderid]
+                    @ViewData["s" + t.senderid]
                 </div>
                 <div class="col-lg-2">
                     <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
@@ -27,7 +27,7 @@
                     @Html.ActionLink("Reply", "sendmes", new { id = t.senderid })
                 </div>
                 <div class="col-lg-1 col-lg-push-5">
-                    @using (Html.BeginForm("mesdel", "m_User", FormMethod.Post))
+                    @using (Html.BeginForm("mesdel", "m_User", new { id = t.Id }, FormMethod.Post, new { }))
                     {
                         <button class="btn btn-default">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

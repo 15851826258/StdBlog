@@ -172,6 +172,19 @@ namespace StdBlog.Controllers
             base.Dispose(disposing);
         }
         #endregion
+
+        public ActionResult DeleteBlog(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var b=db.m_Blogs.Find((int)id);
+            db.Entry(b).State = EntityState.Detached;
+            db.SaveChangesAsync();
+            return RedirectToAction("ShowList");
+        }
+
         public ActionResult CreateBlog()
         {
             return View();
@@ -194,6 +207,10 @@ namespace StdBlog.Controllers
 
         public ActionResult ShowComment(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             var lis = from t in (new m_BlogCommmentContext()).m_BlogCommments.ToList()
                       where t.blogid == id
                       select new m_BlogCommment_name(t, m_UserController.getName(t.senderid));

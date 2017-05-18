@@ -10,7 +10,20 @@ namespace StdBlog.Controllers
 {
     public class LogController : Controller
     {
-
+        public void CookieLogin()
+        {
+            if (Request.Cookies["stdblogql"] != null)
+            {
+                string str = Request.Cookies["stdblogql"].Value;
+                if (str.StartsWith("+"))
+                {
+                    string username = str.Substring(1);
+                    var user = m_UserController.getUserPac(username);
+                    Session["id"] = user.ID;
+                    Session["name"] = user.name;
+                }
+            }
+        }
         public ActionResult AdminLog()
         {
             return View();
@@ -28,13 +41,21 @@ namespace StdBlog.Controllers
             if (Request.Cookies["stdblogql"] != null)
             {
                 string str = Request.Cookies["stdblogql"].Value;
-                if (str.StartsWith("+"))
+                if (str != null && str.StartsWith("+"))
                 {
-                    string username = str.Substring(1);
-                    var user = m_UserController.getUserPac(username);
-                    Session["id"] = user.ID;
-                    Session["name"] = user.name;
-                    return RedirectToAction("UserHome", "m_User");
+                    try
+                    {
+                        string username = str.Substring(1);
+                        var user = m_UserController.getUserPac(username);
+                        Session["id"] = user.ID;
+                        Session["name"] = user.name;
+                        return RedirectToAction("UserHome", "m_User");
+                    }
+                    catch (Exception)
+                    {
+                        Request.Cookies["stdblogql"].Value = null;
+                        return View();
+                    }
                 }
             }
             return View();
@@ -84,6 +105,8 @@ namespace StdBlog.Controllers
 
         public ActionResult UserReg()
         {
+
+
             return View();
         }
     }
