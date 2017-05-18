@@ -102,7 +102,7 @@ namespace StdBlog.Models
     }
     #endregion
 
-    public class m_UserComment
+    public class m_UserMes
     #region 
     {
         public int Id { set; get; }
@@ -111,11 +111,11 @@ namespace StdBlog.Models
         public int recieverid { set; get; }
         public DateTime time { set; get; }
     }
-    public class m_UserCommentContext : DbContext
+    public class m_UserMesContext : DbContext
     {
-        public m_UserCommentContext() : base("name=StdBlogContext") { }
+        public m_UserMesContext() : base("name=StdBlogContext") { }
 
-        public DbSet<m_UserComment> m_UserComments { get; set; }
+        public DbSet<m_UserMes> m_UserMess { get; set; }
     }
     #endregion
 

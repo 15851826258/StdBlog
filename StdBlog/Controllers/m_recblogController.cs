@@ -61,9 +61,16 @@ namespace StdBlog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var obj = db.m_recblogs.Find(id);
-            db.Entry(obj).State = EntityState.Deleted;
-            db.SaveChanges();
+            foreach(var t in db.m_recblogs.ToList())
+            {
+                if(t.blogid==id)
+                {
+                    db.Entry(t).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
+            }
+
+
             return RedirectToAction("Home");
         }
 

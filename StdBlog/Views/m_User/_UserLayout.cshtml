@@ -9,6 +9,7 @@
     <title>Welcome @Session["name"]</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
 
@@ -24,32 +25,51 @@
                 <a class="navbar-brand" href="/m_User/UserHome"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>   @Session["name"]</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                
-                @using (Html.BeginForm("Search", "m_User", FormMethod.Post, new { @class = "navbar-form navbar-left" ,onsubmit= "checksearchbar()" }))
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog ctrl<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/m_Blog/CreateBlog">Create</a></li>
+                            <li>@Html.ActionLink("Show list", "ShowList", "m_Blog")</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                @using (Html.BeginForm("Search", "m_User", FormMethod.Post, new { @class = "navbar-form navbar-left", onsubmit = "checksearchbar()" }))
                 {
                     <div class="form-group">
-                        <input name="sstr" id="sstr" type="text" class="form-control" placeholder="Search">
+                        <input name="sstr" id="sstr" type="text" class="form-control" placeholder="Search blog or user">
                     </div>
-                    <button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 }
+
                 @using (Html.BeginForm("UserLogout", "Log", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
                 {
                     @Html.TextBox("bt1", "Log out", new { @class = "btn btn-danger", type = "submit" })
                 }
 
+                @using (Html.BeginForm("getmes", "m_User", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
+                {
+                    <button class="btn btn-primary" type="submit">
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                        <span class="badge">@StdBlog.Controllers.m_UserController.getMescount((int)Session["id"])</span>
+                    </button>
+                }
+
+
             </div><!--/.nav-collapse -->
-            
+
         </div>
     </nav>
 
 
 
     <div class="container body-content">
-        <hr/>
+        <hr />
         @RenderBody()
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+
     @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>

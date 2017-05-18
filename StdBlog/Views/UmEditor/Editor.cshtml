@@ -1,7 +1,12 @@
 ﻿<!--UmEditor-->
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/css")
 
-
-
+@Styles.Render("~/Content/umeditor/themes/default/css/umeditor.css")
+@Scripts.Render("~/Content/umeditor/umeditor.config.js")
+@Scripts.Render("~/Content/umeditor/umeditor.min.js")
+@Scripts.Render("~/Content/umeditor/lang/zh-cn/zh-cn.js")
     @using (Html.BeginForm("Exc", "Umeditor", FormMethod.Post, new { @class = "f-non", id = "f-non" }))
     {
         <div class="input-group" style="margin:20px">
@@ -15,9 +20,20 @@
     <script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
         <p>快！在这写！</p>
     </script>
+<div>
+    <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">可消失的弹出框</a>
+</div>
+<script >
+    $('#element').popover('show')
+</script>
+
     <div style="margin:20px">
         <input class="btn btn-success" onclick="btn_esClicked()" value="Submit" />
         <input class="btn btn-warning" onclick="btn_erClicked()" value="Cancel" />
+        <button type="button" class="close btn btn-default" data-dismiss="alert" aria-label="Close" value="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        
     </div>
     
 
@@ -26,8 +42,9 @@
         var um = UM.getEditor('myEditor');
 
         function btn_esClicked() {
-            document.getElementById("info").value = UM.getEditor('myEditor').getContent();
-            document.getElementById("f-non").submit();
+
+
+
         }
         function btn_erClicked() {
             window.history.back(); location.reload();

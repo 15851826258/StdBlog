@@ -13,8 +13,32 @@ namespace StdBlog.Controllers
     public class m_UserController : Controller
     {
         private m_UserContext db = new m_UserContext();
+        private m_UserMesContext dbmes = new m_UserMesContext();
 
         #region apis
+        public void mesExcer(int sender, int reciver, string content)
+        {
+            var mes = new m_UserMes()
+            {
+                content = content,
+                recieverid = reciver,
+                time = DateTime.Now,
+                senderid = sender
+            };
+            dbmes.Entry(mes).State = EntityState.Added;
+            dbmes.SaveChangesAsync();
+        }
+
+        public static int getMescount(int id)
+        {
+            m_UserMesContext dbmes = new m_UserMesContext();
+            int res = 0;
+            foreach (var t in dbmes.m_UserMess.ToList())
+            {
+                if (t.recieverid == id) res++;
+            }
+            return res;
+        }
         public static bool Vertify(string uid, string pw)
         {
             m_UserContext db1 = new m_UserContext();
@@ -48,11 +72,7 @@ namespace StdBlog.Controllers
         }
         public static m_User getUserPac(int id)
         {
-            m_UserContext db1 = new m_UserContext();
-            if (id == -1) return null;
-            foreach (var t in db1.m_Users)
-                if (t.ID == id) return t;
-            return null;
+            return (new m_UserContext()).m_Users.Find(id);
         }
 
         #endregion
@@ -172,6 +192,47 @@ namespace StdBlog.Controllers
             base.Dispose(disposing);
         }
         #endregion
+
+        public ActionResult mesdel(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return RedirectToAction("UserHome");
+        }
+
+        public ActionResult mesExc(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            mesExcer((int)id, (int)Session["id"], Request["ccontent"]);
+            return RedirectToAction("UserHome");
+        }
+
+        public ActionResult getmes()
+        {
+            var lis = from t in dbmes.m_UserMess.ToList()
+                      where t.recieverid == (int)Session["id"]
+                      select t;
+            foreach(var t in lis)
+            {
+                ViewData.Add("s" + t.Id, db.m_Users.Find(t.senderid).name);
+            }
+            return View(lis);
+        }
+
+        public ActionResult sendmes(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ViewData["reciver"] = db.m_Users.Find((int)id).name;
+            return View();
+        }
 
         public ActionResult UserHome()
         {

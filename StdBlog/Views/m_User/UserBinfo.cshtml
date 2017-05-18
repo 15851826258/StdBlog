@@ -8,18 +8,35 @@
 
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title">@Model.name</h3>
+        <div class="row">
+            <div class="col-lg-2">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                @Model.name
+            </div>
+            <div class="col-lg-2">
+                <div class="col-lg-2">
+                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                    @Html.ActionLink("Send message", "sendmes", new { id = Model.ID })
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="panel-footer">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         @if (Model.gender == StdBlog.Models.m_User.Gender.female)
         {@(new MvcHtmlString("Her blogs"))}
         @if (Model.gender == StdBlog.Models.m_User.Gender.male)
         {@(new MvcHtmlString("His blogs"))}
         @if (Model.gender == StdBlog.Models.m_User.Gender.secret)
         {@(new MvcHtmlString("xxx's blogs"))}
-
     </div>
-    @{Html.RenderAction("uShowList", "m_Blog", new { id = Model.ID });}
+    <div class="row">
+        <div class="col-lg-push-1">
+            @{Html.RenderAction("uShowList", "m_Blog", new { id = Model.ID });}
+        </div>
+    </div>
+
     <div class="panel-footer">
         <a onclick="goback()">Back</a>
     </div>

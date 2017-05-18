@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="panel panel-info ">
+    <div class="panel-heading">
+        Send message to @ViewData["reciver"]
+    </div>
+    <div class="panel-body">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Content" id="cinput">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="uploadmes()">Send</button>
+            </span>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("mesExc", "m_User", new { id = Model.ID }, FormMethod.Post, new { id = "cform" }))
+{
+    <input type="hidden" id="ccontent" name="ccontent" />
+}
+
+<script type="text/javascript">
+    function uploadcomment() {
+        document.getElementById("ccontent").value = document.getElementById("cinput").value;
+        document.getElementById("cform").submit();
+
+    }
+</script>

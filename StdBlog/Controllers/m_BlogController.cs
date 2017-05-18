@@ -288,6 +288,7 @@ namespace StdBlog.Controllers
             return View(lis);
         }
 
+        //show user's blogs
         public ActionResult ShowList()
         {
             var lis = from t in db.m_Blogs.ToList()

@@ -6,8 +6,8 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-lg-2">
-                    <span class="glyphicon glyphicon-tag" aria-hidden="true"/>
-                    @t.title
+                    <span class="glyphicon glyphicon-tag" aria-hidden="true" />
+                    @Html.ActionLink(t.title, "ShowBlog", "m_Blog", new { id = t.ID }, new { })
                 </div>
                 <div class="col-lg-2 col-lg-push-1">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true" />
@@ -19,4 +19,4 @@
             @{Html.RenderAction("Show", "m_Blog", new { id = t.ID });}
         </div>
     </div>
-}
+                }

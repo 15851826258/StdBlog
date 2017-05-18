@@ -376,6 +376,8 @@
     <Content Include="Views\m_recblog\Home.cshtml" />
     <Content Include="Views\Home\Return.cshtml" />
     <Content Include="Views\m_recblog\ShowBlog.cshtml" />
+    <Content Include="Views\m_User\sendmes.cshtml" />
+    <Content Include="Views\m_User\getmes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\umeditor\net\upload\" />
