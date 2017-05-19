@@ -4,11 +4,29 @@
     Layout = "~/Views/m_User/_UserLayout.cshtml";
 }
 
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
 
 <div class="panel panel-primary ">
     <div class="panel-heading">
-        <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-        @Html.DisplayFor(title => Model.title)
+        <div class="row">
+            <div class="col-lg-2">
+                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+                @Html.DisplayFor(title => Model.title)
+            </div>
+            <div class="col-lg-2">
+                @using (Ajax.BeginForm("thumbup", new { }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "thumbupaj" }))
+                {
+
+                }
+
+
+                <div id="thumbupaj">
+                    @{Html.RenderAction("showthumb", new { id = Model.ID }); }
+                </div>
+            </div>
+        </div>
     </div>
     <table class="table">
         <!--header-->

@@ -26,6 +26,22 @@ namespace StdBlog.Models
     }
     #endregion
 
+    public class m_Blog_extinfo
+    #region
+    {
+        public int ID { get; set; }
+        public int blogid { get; set; }
+        public int followid { get; set; }
+        public bool vertify { get; set; }
+    }
+    public class m_Blog_extinfoContext : DbContext
+    {
+        public m_Blog_extinfoContext() : base("name=StdBlogContext") { }
+
+        public DbSet<m_Blog_extinfo> m_Blog_extinfos { get; set; }
+    }
+    #endregion
+
     public class m_BlogCommment
     #region 
     {

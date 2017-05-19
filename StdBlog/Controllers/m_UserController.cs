@@ -51,10 +51,7 @@ namespace StdBlog.Controllers
         }
         public static string getName(int uid)
         {
-            m_UserContext db1 = new m_UserContext();
-            foreach (var t in db1.m_Users)
-                if (t.ID == uid) return t.name;
-            return "";
+            return (new m_UserContext()).m_Users.Find(uid).name;
         }
         public static int getID(string uid)
         {

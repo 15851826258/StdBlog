@@ -68,7 +68,7 @@ namespace StdBlog.Helper
         public static string Encode(IEnumerable<int> IdList)
         {
             StringBuilder sb = new StringBuilder();
-            foreach(var t in IdList)
+            foreach (var t in IdList)
             {
                 sb.Append('|');
                 sb.Append(t);
@@ -83,4 +83,21 @@ namespace StdBlog.Helper
                    ;
         }
     }
+
+    public class Thumbup
+    {
+        public static string getPageStr(IEnumerable<StdBlog.Models.m_Blog_extinfo> list)
+        {
+            string str = "";
+            foreach (var t in list)
+            {
+                str += "," + Controllers.m_UserController.getName(t.followid);
+            }
+            return str.Substring(1);
+
+
+
+        }
+    }
+
 }

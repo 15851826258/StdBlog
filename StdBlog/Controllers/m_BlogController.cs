@@ -13,7 +13,7 @@ namespace StdBlog.Controllers
     public class m_BlogController : Controller
     {
         private m_BlogContext db = new m_BlogContext();
-
+        private m_Blog_extinfoContext dbex = new m_Blog_extinfoContext();
 
         #region APIS
         static IEnumerable<m_sensitivekeyword> skys = (new m_sensitivekeywordContext()).m_sensitivekeywords.ToList();
@@ -173,15 +173,63 @@ namespace StdBlog.Controllers
         }
         #endregion
 
+        public ActionResult showthumb(int?id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            int userid = (int)Session["id"];
+
+
+            bool isthumb = (from t in dbex.m_Blog_extinfos.ToList()
+                            where t.blogid == id && t.followid == (int)Session["id"]
+                            select t.vertify).ElementAt(0);
+            ViewData.Add("c", isthumb);
+            return View();
+        }
+
+        public ActionResult thumbup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            bool res = false;
+            int userid = (int)Session["id"];
+            var obj = dbex.m_Blog_extinfos.Where(o => (o.blogid == id && o.followid == userid));
+            if (obj.Count() == 0)
+            {
+                var on = new m_Blog_extinfo()
+                {
+                    blogid = (int)id,
+                    vertify = true,
+                    followid = userid
+                };
+                dbex.Entry(on).State = EntityState.Added;
+                res = true;
+            }
+            else
+            {
+                var ont = obj.ElementAt(0);
+                ont.vertify = !ont.vertify;
+                dbex.Entry(ont).State = EntityState.Modified;
+                res = ont.vertify;
+            }
+            dbex.SaveChanges();
+            ViewData.Add("c", res);
+            return View();
+        }
+
         public ActionResult DeleteBlog(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var b=db.m_Blogs.Find((int)id);
-            db.Entry(b).State = EntityState.Detached;
-            db.SaveChangesAsync();
+            var b = db.m_Blogs.Find((int)id);
+            db.Entry(b).State = EntityState.Deleted;
+            db.SaveChanges();
             return RedirectToAction("ShowList");
         }
 
@@ -217,6 +265,7 @@ namespace StdBlog.Controllers
 
             return View(lis);
         }
+
         public ActionResult Show(int? id)
         {
             if (id == null)
@@ -264,6 +313,10 @@ namespace StdBlog.Controllers
             m_Blog.visit_count++;
             db.Entry(m_Blog).State = EntityState.Modified;
             db.SaveChanges();
+
+            //thumb up
+            var thumbupList = dbex.m_Blog_extinfos.Where(o => (o.blogid == id && o.followid != (int)Session["id"] && o.vertify));
+            ViewData.Add("thumbstr", Helper.Thumbup.getPageStr(thumbupList));
 
             return View(m_Blog);
         }

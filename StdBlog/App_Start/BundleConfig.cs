@@ -12,6 +12,7 @@ namespace StdBlog
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
             // 使用要用于开发和学习的 Modernizr 的开发版本。然后，当你做好

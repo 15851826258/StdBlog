@@ -1,0 +1,10 @@
+﻿
+
+@if ((bool)ViewData["c"])
+{
+    @(new MvcHtmlString("<button class=\"btn btn-default\" type=\"submit\"><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span></button>"))
+}
+else
+{
+    @(new MvcHtmlString("<button class=\"btn btn-default\" type=\"submit\"><span class=\"glyphicon glyphicon-heart-empty\" aria-hidden=\"true\"></span></button>"))
+}

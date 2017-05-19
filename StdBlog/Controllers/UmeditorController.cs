@@ -8,6 +8,7 @@ namespace StdBlog.Controllers
 {
     public class UmeditorController : Controller
     {
+        static bool c = false;
         public ActionResult Editor()
         {
             return View();
@@ -19,5 +20,18 @@ namespace StdBlog.Controllers
             return RedirectToAction("UserHome", "m_User");
         }
 
+        public ActionResult tev()
+        {
+            ViewData.Add(nameof(c), c);
+            return View();
+        }
+        public ActionResult tevexc(int? id)
+        {
+            if (id == 0) c = !c;
+            if (c)
+                return Content("<button class=\"btn btn-default\" type=\"submit\"><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span></button>");
+            else
+                return Content("<button class=\"btn btn-default\" type=\"submit\"><span class=\"glyphicon glyphicon-heart-empty\" aria-hidden=\"true\"></span></button>");
+        }
     }
 }
