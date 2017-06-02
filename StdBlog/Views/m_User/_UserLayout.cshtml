@@ -48,20 +48,38 @@
                     @Html.TextBox("bt1", "Log out", new { @class = "btn btn-danger btn-sm", type = "submit" })
                 }
 
-                @using (Html.BeginForm("getmes", "m_User", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
-                {
-                    <button class="btn btn-primary btn-sm" type="submit">
+                <div class="navbar-form navbar-right">
+                    <button onclick="mesbtn()" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#myModal">
                         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                         <span class="badge">@StdBlog.Controllers.m_UserController.getMescount((int)Session["id"])</span>
                     </button>
-                }
+                </div>
+                <script type="text/javascript">
+                    function mesbtn() {
+                        document.getElementById('mesframe').src = "/m_User/getmes";
+                    }
+                </script>
+
 
 
             </div><!--/.nav-collapse -->
 
         </div>
     </nav>
-
+    <!-- Message Box Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-envelope" aria-hidden="true" /></h4>
+                </div>
+                <div class="modal-body" style="max-height:500px;">
+                    <iframe id="mesframe" frameborder="0" style="max-height:500px;width:100%;min-height:350px;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="container body-content">

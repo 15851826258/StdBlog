@@ -12,8 +12,15 @@ namespace StdBlog.Controllers
 {
     public class m_UserController : Controller
     {
+        public m_UserController()
+        {
+            ctrlManager.ctrls.user = this;
+        }
+
+
         private m_UserContext db = new m_UserContext();
         private m_UserMesContext dbmes = new m_UserMesContext();
+
 
         #region apis
         public void mesExcer(int sender, int reciver, string content)
@@ -200,7 +207,7 @@ namespace StdBlog.Controllers
             var obj = dbmes.m_UserMess.Find((int)id);
             dbmes.Entry(obj).State = EntityState.Deleted;
             dbmes.SaveChanges();
-            return RedirectToAction("UserHome");
+            return RedirectToAction("getmes");
         }
 
         public ActionResult mesExc(int? id)
@@ -210,7 +217,7 @@ namespace StdBlog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             mesExcer((int)Session["id"], (int)id, Request["ccontent"]);
-            return RedirectToAction("UserHome");
+            return RedirectToAction("Return","Home",new { });
         }
 
         public ActionResult getmes()
@@ -220,7 +227,8 @@ namespace StdBlog.Controllers
                       select t;
             foreach (var t in lis)
             {
-                ViewData.Add("s" + t.senderid, db.m_Users.Find(t.senderid).name);
+                if (!ViewData.Keys.Contains("s" + t.senderid))
+                    ViewData.Add("s" + t.senderid, db.m_Users.Find(t.senderid).name);
             }
             return View(lis);
         }
@@ -234,6 +242,27 @@ namespace StdBlog.Controllers
 
             ViewData["reciver"] = db.m_Users.Find((int)id).name;
             return View(db.m_Users.Find((int)id));
+        }
+
+        public ActionResult sendmesajax(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViewData["reciver"] = db.m_Users.Find((int)id).name;
+            return View(db.m_Users.Find((int)id));
+        }
+
+        public ActionResult mesExcajax(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            mesExcer((int)Session["id"], (int)id, Request["ccontent"]);
+            return RedirectToAction("getmes");
         }
 
         public ActionResult UserHome()

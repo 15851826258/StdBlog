@@ -93,6 +93,28 @@ namespace StdBlog.Models
     }
     #endregion
 
+
+    public class m_UserPair
+    {
+        public int ID { get; set; }
+        public string name { get; set; }
+
+        public m_UserPair()
+        {
+
+        }
+        public m_UserPair(int id,string name)
+        {
+            this.ID = id;
+            this.name = name;
+        }
+        public m_UserPair(m_User user)
+        {
+            this.ID = user.ID;
+            this.name = user.name;
+        }
+    }
+
     public class m_User
     #region
     {

@@ -15,17 +15,6 @@
                 <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
                 @Html.DisplayFor(title => Model.title)
             </div>
-            <div class="col-lg-2">
-                @using (Ajax.BeginForm("thumbup", new { }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "thumbupaj" }))
-                {
-
-                }
-
-
-                <div id="thumbupaj">
-                    @{Html.RenderAction("showthumb", new { id = Model.ID }); }
-                </div>
-            </div>
         </div>
     </div>
     <table class="table">
@@ -66,6 +55,14 @@
                 </div>
             </td>
         </tr>
+        <!-- thumbup -->
+        <tr>
+            <td colspan="3">
+                <div id="ajdiv">
+                    @{Html.RenderAction("showthumb", new { id = Model.ID }); }
+                </div>
+            </td>
+        </tr>
         <!--comment list-->
         <tr>
             <td colspan="3">
@@ -94,6 +91,7 @@
                 </div>
             </td>
         </tr>
+
     </table>
     <div class="panel-footer">
         <a onclick="goback()">Back</a>

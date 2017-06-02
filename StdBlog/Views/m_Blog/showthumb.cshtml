@@ -1,10 +1,27 @@
-﻿
+﻿@model StdBlog.Models.m_Blog
+<hr />
 
-@if ((bool)ViewData["c"])
-{
-    @(new MvcHtmlString("<button class=\"btn btn-default\" type=\"submit\"><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span></button>"))
-}
-else
-{
-    @(new MvcHtmlString("<button class=\"btn btn-default\" type=\"submit\"><span class=\"glyphicon glyphicon-heart-empty\" aria-hidden=\"true\"></span></button>"))
-}
+<div class="row">
+    <div class="col-lg-1" style="font-size:22px;margin-left:10px;">
+        @if ((bool)ViewData["c"])
+        {
+            <a data-ajax="true" data-ajax-method="Post" data-ajax-mode="replace" data-ajax-update="#ajdiv" href="/m_Blog/thumbup/@(Model.ID)" style="color:red;">
+                <span class="glyphicon glyphicon-heart" aria-hidden="true" />
+            </a>
+        }
+        else
+        {
+            <a data-ajax="true" data-ajax-method="Post" data-ajax-mode="replace" data-ajax-update="#ajdiv" href="/m_Blog/thumbup/@(Model.ID)" style="color:gray;">
+                <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" />
+            </a>
+        }
+    </div>
+
+
+            @(new MvcHtmlString((string)ViewData["thumblist"]))
+            @(ViewData["lc"]) people like this blog
+        
+
+</div>
+
+

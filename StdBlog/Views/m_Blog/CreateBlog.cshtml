@@ -5,45 +5,44 @@
 }
 
 <div class="row">
-    <div class="col-lg-offset-1">
+    <div >
         @using (Html.BeginForm("Exc", "Umeditor", FormMethod.Post, new { @class = "f-non", id = "f-non" }))
         {
             <div class="input-group" style="margin:20px">
                 <span class="input-group-addon" id="basic-addon3">Title</span>
                 <input placeholder="Input your title" class="form-control" id="title" name="title" type="text"
-                       style="max-width:350px;" />
-
+                        />
+                <div class="input-group-btn">
+                    <button class="btn btn-success" onclick="btn_esClicked()">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Submit
+                    </button>
+                    <button class="btn btn-warning" onclick="btn_erClicked()">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Cancel
+                    </button>
+                </div>
             </div>
             <input class="i-non" id="info" name="info" type="hidden" />
         }
     </div>
 </div>
+        <!--style给定宽度可以影响编辑器的最终宽度-->
+        @Styles.Render("~/Content/umeditor/themes/default/css/umeditor.css")
+        @Scripts.Render("~/Content/umeditor/third-party/jquery.min.js")
+        @Scripts.Render("~/Content/umeditor/umeditor.config.js")
+        @Scripts.Render("~/Content/umeditor/umeditor.min.js")
+        @Scripts.Render("~/Content/umeditor/lang/zh-cn/zh-cn.js")
+        <script type="text/plain" id="myEditor" style="height:600px;width:100%;">
+            <p>快！在这写！</p>
+        </script>
 
 
-<!--style给定宽度可以影响编辑器的最终宽度-->
-@Styles.Render("~/Content/umeditor/themes/default/css/umeditor.css")
-@Scripts.Render("~/Content/umeditor/third-party/jquery.min.js")
-@Scripts.Render("~/Content/umeditor/umeditor.config.js")
-@Scripts.Render("~/Content/umeditor/umeditor.min.js")
-@Scripts.Render("~/Content/umeditor/lang/zh-cn/zh-cn.js")
-<script type="text/plain" id="myEditor" style="width:1000px;height:240px;">
-    <p>快！在这写！</p>
-</script>
 
 
 
-<div class=" row" style="margin:50px;">
-    <div class="col-lg-2 col-lg-offset-1">
-        <button class="btn btn-success" onclick="btn_esClicked()">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Submit
-        </button>
-    </div>
-    <div class="col-lg-2" >
-        <button class="btn btn-warning" onclick="btn_erClicked()">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Cancel
-        </button>
-    </div>
-</div>
+
+
+
+
 
 
 <script type="text/javascript">
@@ -51,6 +50,7 @@
         var um = UM.getEditor('myEditor');
 
         function btn_esClicked() {
+
             document.getElementById("info").value = UM.getEditor('myEditor').getContent();
             document.getElementById("f-non").submit();
         }

@@ -93,6 +93,7 @@ namespace StdBlog.Helper
             {
                 str += "," + Controllers.m_UserController.getName(t.followid);
             }
+            if (str.Length < 1) return "";
             return str.Substring(1);
 
 
@@ -100,4 +101,14 @@ namespace StdBlog.Helper
         }
     }
 
+
+}
+
+namespace StdBlog.ctrlManager
+{
+    public class ctrls
+    {
+        public static StdBlog.Controllers.m_UserController user { get; set; }
+        public static StdBlog.Controllers.m_BlogController blog { get; set; }
+    }
 }

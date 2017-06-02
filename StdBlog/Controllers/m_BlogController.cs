@@ -12,6 +12,12 @@ namespace StdBlog.Controllers
 {
     public class m_BlogController : Controller
     {
+        public m_BlogController()
+        {
+            ctrlManager.ctrls.blog = this;
+
+        }
+
         private m_BlogContext db = new m_BlogContext();
         private m_Blog_extinfoContext dbex = new m_Blog_extinfoContext();
 
@@ -173,7 +179,7 @@ namespace StdBlog.Controllers
         }
         #endregion
 
-        public ActionResult showthumb(int?id)
+        public ActionResult showthumb(int? id)
         {
             if (id == null)
             {
@@ -182,11 +188,33 @@ namespace StdBlog.Controllers
             int userid = (int)Session["id"];
 
 
-            bool isthumb = (from t in dbex.m_Blog_extinfos.ToList()
-                            where t.blogid == id && t.followid == (int)Session["id"]
-                            select t.vertify).ElementAt(0);
+            var list = (from t in dbex.m_Blog_extinfos.ToList()
+                        where t.blogid == id && t.followid == (int)Session["id"]
+                        select t.vertify).ToList();
+            bool isthumb = false;
+            if (list.Count() > 0) isthumb = list[0];
             ViewData.Add("c", isthumb);
-            return View();
+
+            var thumbupList = from o in dbex.m_Blog_extinfos.ToList()
+                              where o.blogid == id && o.followid != (int)Session["id"] && o.vertify
+                              select o;
+            string thumblist = "";
+            for (int i = 0; i < thumbupList.Count(); i++)
+            {
+                if (i == 3) break;
+                int _id = thumbupList.ElementAt(i).followid;
+                string name = m_UserController.getName(_id);
+                if (i != 0) thumblist += ",";
+                thumblist += "<a href=\"/m_user/userbinfo/" + _id + "\">" + name + "</a>";
+            }
+            ViewData.Add("thumblist", thumblist);
+
+            int lc = thumbupList.Count();
+            if (isthumb) lc++;
+            ViewData.Add("lc", lc);
+            ViewData.Add("thumbstr", Helper.Thumbup.getPageStr(thumbupList));
+
+            return View(db.m_Blogs.Find(id));
         }
 
         public ActionResult thumbup(int? id)
@@ -197,7 +225,11 @@ namespace StdBlog.Controllers
             }
             bool res = false;
             int userid = (int)Session["id"];
-            var obj = dbex.m_Blog_extinfos.Where(o => (o.blogid == id && o.followid == userid));
+
+            var obj = from o in dbex.m_Blog_extinfos.ToList()
+                      where o.blogid == id && o.followid == userid
+                      select o;
+
             if (obj.Count() == 0)
             {
                 var on = new m_Blog_extinfo()
@@ -218,7 +250,31 @@ namespace StdBlog.Controllers
             }
             dbex.SaveChanges();
             ViewData.Add("c", res);
-            return View();
+            var thumbupList = from o in dbex.m_Blog_extinfos.ToList()
+                              where o.blogid == id && o.followid != (int)Session["id"] && o.vertify
+                              select o;
+
+            string thumblist = "";
+            for (int i = 0; i < thumbupList.Count(); i++)
+            {
+                if (i == 3) break;
+                int _id = thumbupList.ElementAt(i).followid;
+                string name = m_UserController.getName(_id);
+                if (i != 0) thumblist += ",";
+                thumblist += "<a href=\"/m_user/userbinfo/" + _id + "\">" + name + "</a>";
+            }
+            thumblist += "...";
+            ViewData.Add("thumblist", thumblist);
+
+
+
+            int lc = thumbupList.Count();
+            if (res) lc++;
+            ViewData.Add("lc", lc);
+
+            ViewData.Add("thumbstr", Helper.Thumbup.getPageStr(thumbupList));
+
+            return View(db.m_Blogs.Find(id));
         }
 
         public ActionResult DeleteBlog(int? id)
@@ -315,8 +371,7 @@ namespace StdBlog.Controllers
             db.SaveChanges();
 
             //thumb up
-            var thumbupList = dbex.m_Blog_extinfos.Where(o => (o.blogid == id && o.followid != (int)Session["id"] && o.vertify));
-            ViewData.Add("thumbstr", Helper.Thumbup.getPageStr(thumbupList));
+
 
             return View(m_Blog);
         }

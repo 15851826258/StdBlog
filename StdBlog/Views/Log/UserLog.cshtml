@@ -16,6 +16,7 @@
     textarea {
         max-width: 275px;
     }
+
 </style>
 
 
@@ -37,16 +38,17 @@
             <h5 class="form-signin-heading" style="color:white;display:inline;margin:5px;margin-bottom:5px;">Remember Me</h5>
         </div>
 
-            <script type="text/javascript">
-                function signinclicked() {
-                    document.getElementById("subbtn").click();
-                }
-            </script>
-            <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                <a class="btn btn-default btn-success" role="button" onclick="signinclicked()">Sign in</a>
-                @Html.ActionLink("Sign up", "UserReg", "Log", null, new { @class = "btn btn-default btn-warning", role = "button" })
-            </div>
-            <button class="btn-sin" id="subbtn" type="submit"></button>
+        <script type="text/javascript">
+            function signinclicked() {
+                document.getElementById("subbtn").click();
+            }
+        </script>
+        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+            <a class="btn btn-default btn-success" role="button" onclick="signinclicked()">Sign in</a>
+            @Html.ActionLink("Sign up", "UserReg", "Log", null, new { @class = "btn btn-default btn-warning", role = "button" })
+        </div>
+        <button class="btn-sin" id="subbtn" type="submit"></button>
+
     }
 
 </div> <!-- /container -->

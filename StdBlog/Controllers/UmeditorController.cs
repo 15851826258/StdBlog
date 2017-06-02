@@ -22,16 +22,11 @@ namespace StdBlog.Controllers
 
         public ActionResult tev()
         {
-            ViewData.Add(nameof(c), c);
             return View();
         }
-        public ActionResult tevexc(int? id)
+        public ActionResult tevexc()
         {
-            if (id == 0) c = !c;
-            if (c)
-                return Content("<button class=\"btn btn-default\" type=\"submit\"><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span></button>");
-            else
-                return Content("<button class=\"btn btn-default\" type=\"submit\"><span class=\"glyphicon glyphicon-heart-empty\" aria-hidden=\"true\"></span></button>");
+            return View();
         }
     }
 }

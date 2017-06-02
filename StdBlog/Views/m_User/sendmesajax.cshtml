@@ -1,0 +1,39 @@
+﻿@model StdBlog.Models.m_User
+
+@Styles.Render("/Content/bootstrap.min.css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/bootstrap")
+
+<div class="panel panel-info ">
+    <div class="panel-heading">
+        Send message to @ViewData["reciver"]
+    </div>
+    <div class="panel-body">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Content" id="cinput">
+            <span class="input-group-btn">
+                <button class="btn btn-success" type="button" onclick="uploadmes()">Send</button>
+            </span>
+        </div>
+    </div>
+</div>
+@{
+    AjaxOptions ajaxconfig = new AjaxOptions()
+    {
+        HttpMethod = "Post",
+        UpdateTargetId = "ajaxdiv"
+    };
+}
+@using (Ajax.BeginForm("mesExc", "m_User", new { id = Model.ID }, ajaxconfig, new { id = "cform" }))
+{
+    <input type="hidden" id="ccontent" name="ccontent" />
+}
+
+<script type="text/javascript">
+    function uploadmes() {
+        document.getElementById("ccontent").value = document.getElementById("cinput").value;
+        document.getElementById("cform").submit();
+
+    }
+</script>

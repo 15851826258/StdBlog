@@ -5,7 +5,12 @@
     Layout = "~/Views/m_User/_UserLayout.cshtml";
 }
 
-
+@if(Model.Count()==0)
+{
+    <h2>
+        No Blog Here...
+    </h2>
+}
 
 @foreach (var item in Model)
 {

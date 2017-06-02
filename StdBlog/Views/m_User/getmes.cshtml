@@ -1,64 +1,59 @@
 ﻿@model  IEnumerable<StdBlog.Models.m_UserMes>
 
-@{
-    Layout = "~/Views/m_User/_UserLayout.cshtml";
-}
-
-<div class="panel panel-info ">
-    <div class="panel-heading">
-        Message box
-    </div>
-    <div class="panel-body">
-        @if (Model.Count() == 0) { @(new MvcHtmlString("None here...")) }
-        @foreach (var t in Model)
+<div id="ajaxdiv">
+@Styles.Render("/Content/bootstrap.min.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @if (Model.Count() == 0)
+    {
+        @(new MvcHtmlString("None here..."))
+    }
+    else
+    {
+        AjaxOptions ajaxconfig = new AjaxOptions()
         {
-            <div class="row">
+            HttpMethod = "Post",
+            UpdateTargetId = "ajaxdiv"
+        };
+        
+        <table class=" table">
+            @foreach (var t in Model)
+        {
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        @ViewData["s" + t.senderid]
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        @t.time
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        @Ajax.ActionLink("Reply", "sendmesajax", new { id = t.senderid },ajaxconfig)
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        @Ajax.ActionLink("Delete", "mesdel", new { id = t.Id }, ajaxconfig)
+                    </td>
+                </tr>
 
-                <div class="col-lg-2">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                    @ViewData["s" + t.senderid]
-                </div>
-                <div class="col-lg-2">
-                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                    @t.time
-                </div>
-                <div class="col-lg-2">
-                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                    @Html.ActionLink("Reply", "sendmes", new { id = t.senderid })
-                </div>
-                <div class="col-lg-1 col-lg-push-5">
-                    @using (Html.BeginForm("mesdel", "m_User", new { id = t.Id }, FormMethod.Post, new { }))
-                    {
-                        <button class="btn btn-default">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </button>
-                    }
-                </div>
-                <!--
 
 
-                                    <script type="text/javascript">
-                    function (t.Id)cboxClicked()() {
-                        document.getElementById("cf(t.Id)").submit();
-                        return true;
-                    }
-                </script>
-                                    <button id="cbox" type="button" class="close" data-dismiss="alert" aria-label="Close"
-                        onclick="@(t.Id)cboxClicked()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-
-                    -->
-
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                    @t.content
-                </div>
-            </div>
-            <hr />
+                <tr>
+                    <td colspan="4">
+                        @t.content
+                        <hr />
+                    </td>
+                </tr>
         }
-    </div>
+        </table>
+    }
 
 </div>
+
+
+
+
+

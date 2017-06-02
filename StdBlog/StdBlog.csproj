@@ -393,6 +393,8 @@
     <Content Include="Views\UmEditor\tevexc.cshtml" />
     <Content Include="Views\m_Blog\thumbup.cshtml" />
     <Content Include="Views\m_Blog\showthumb.cshtml" />
+    <Content Include="Views\m_Blog\thumblist.cshtml" />
+    <Content Include="Views\m_User\sendmesajax.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\umeditor\net\upload\" />
